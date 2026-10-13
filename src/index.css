@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream text-brand-brown font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Kitchen loader animations */
+@keyframes steam-rise {
+  0% { opacity: 0; transform: translateY(3px); }
+  35% { opacity: 0.85; }
+  100% { opacity: 0; transform: translateY(-12px); }
+}
+@keyframes pot-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2.5px); }
+}
+@keyframes lid-rattle {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(-2deg) translateY(-1.5px); }
+  75% { transform: rotate(2deg) translateY(-1px); }
+}
+.steam {
+  animation: steam-rise 1.6s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+.steam-2 { animation-delay: 0.5s; }
+.steam-3 { animation-delay: 1s; }
+.pot-body { animation: pot-bob 1.6s ease-in-out infinite; }
+.pot-lid { animation: lid-rattle 1.2s ease-in-out infinite; transform-origin: center; }
+
+/* Cart bump animation */
+@keyframes cart-bump {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.3); }
+  60% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+.cart-bump {
+  animation: cart-bump 0.5s ease-out;
+}
+
+/* Hover rise animation — triggers on hover via group-hover */
+@keyframes hover-rise {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+/* Nav link glow */
+@keyframes nav-glow {
+  0%, 100% { box-shadow: 0 0 0 rgba(199, 61, 19, 0); }
+  50% { box-shadow: 0 0 12px rgba(199, 61, 19, 0.35); }
+}
+
+/* Button glow */
+@keyframes btn-glow {
+  0%, 100% { box-shadow: 0 0 0 rgba(249, 167, 36, 0); }
+  50% { box-shadow: 0 0 20px rgba(249, 167, 36, 0.5); }
+}
+
+/* Reveal animation */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reveal-animate {
+  animation: reveal-up 0.6s ease-out forwards;
+}
+
+/* Admin editor controls */
+.admin-input {
+  width: 100%;
+  min-height: 46px;
+  appearance: none;
+  background: #FFFFFF;
+  border: 1px solid #D8C5B8;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #3E2622;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  outline: none;
+  box-shadow: 0 1px 2px rgba(62, 38, 34, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.admin-input:hover {
+  border-color: #B99482;
+}
+.admin-input::placeholder {
+  color: #8D7062;
+  opacity: 0.9;
+}
+.admin-input:focus {
+  border-color: #C73D13;
+  box-shadow: 0 0 0 3px rgba(199, 61, 19, 0.16);
+}
+select.admin-input {
+  cursor: pointer;
+}
+.admin-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(62, 38, 34, 0.45);
+  animation: modal-fade-in 0.22s ease-out both;
+}
+.admin-modal-panel {
+  animation: modal-panel-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes modal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modal-panel-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .admin-modal-backdrop,
+  .admin-modal-panel { animation: none; }
+}
+.admin-checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  border: 2px solid #B99482;
+  border-radius: 5px;
+  background: #FFFFFF;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.admin-checkbox:hover {
+  border-color: #C73D13;
+  box-shadow: 0 0 0 3px rgba(199, 61, 19, 0.12);
+}
+.admin-checkbox:checked {
+  background: #C73D13;
+  border-color: #C73D13;
+}
+.admin-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 11px;
+  border: solid #FFFFFF;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
